@@ -1,6 +1,8 @@
 # flutter_webtoon
 
-A new Flutter project.
+Nomadcoders Flutter Webtoon App Project
+
+* AppBar
 
 ## Getting Started
 

@@ -4,6 +4,9 @@ Nomadcoders Flutter Webtoon App Project
 
 * AppBar
 
+* http
+* async await
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

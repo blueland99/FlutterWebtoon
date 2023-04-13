@@ -12,6 +12,7 @@ Nomadcoders Flutter Webtoon App Project
 * JSON
 * Instance
 * Future
+* FutureBuilder
 
 ## Getting Started
 

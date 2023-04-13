@@ -14,6 +14,11 @@ Nomadcoders Flutter Webtoon App Project
 * Future
 * FutureBuilder
 
+* CircularProgressIndicator
+* ListView
+* ListView.builder
+* ListView.separated
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

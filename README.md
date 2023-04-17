@@ -21,6 +21,9 @@ Nomadcoders Flutter Webtoon App Project
 
 * Image.network
 * BoxShadow
+* GestureDetector : 동작 감지
+* Navigator.push
+* MaterialPageRoute
 
 ## Getting Started
 

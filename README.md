@@ -25,6 +25,8 @@ Nomadcoders Flutter Webtoon App Project
 * Navigator.push
 * MaterialPageRoute
 
+* Hero
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -11,8 +11,10 @@ Nomadcoders Flutter Webtoon App Project
 * Model, Named Constructor
 * JSON
 * Instance
+
 * Future
 * FutureBuilder
+데이터를 다 받기 전에 데이터 없이 그릴 수 없는 부분을 먼저 그려주기 위해 사용
 
 * CircularProgressIndicator
 * ListView
@@ -25,7 +27,7 @@ Nomadcoders Flutter Webtoon App Project
 * Navigator.push
 * MaterialPageRoute
 
-* Hero
+* Hero : 두 화면 사이에 애니메이션을 주는 컴포넌트
 
 ## Getting Started
 

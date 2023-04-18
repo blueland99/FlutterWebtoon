@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webtoon/models/webtoon_model.dart';
 import 'package:flutter_webtoon/services/api_service.dart';
 import 'package:flutter_webtoon/widgets/episode_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/webtoon_detail_model.dart';
 import '../models/webtoon_episode_model.dart';
@@ -21,12 +22,42 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<WebtoonDetailModel> webtoon;
   late Future<List<WebtoonEpisodeModel>> episodes;
+  late SharedPreferences pref;
+  bool isLiked = false;
+
+  Future initPref() async {
+    pref = await SharedPreferences.getInstance();
+    final likedToons = pref.getStringList('likedToons');
+    if (likedToons != null) {
+      setState(() {
+        isLiked = likedToons.contains(widget.webtoon.id);
+      });
+    } else {
+      await pref.setStringList('likedToons', []);
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     webtoon = ApiService.getToonById(widget.webtoon.id);
     episodes = ApiService.getLatestEpisodesById(widget.webtoon.id);
+    initPref();
+  }
+
+  onHeartTap() async {
+    final likedToons = pref.getStringList('likedToons');
+    if (likedToons != null) {
+      if (isLiked) {
+        likedToons.remove(widget.webtoon.id);
+      } else {
+        likedToons.add(widget.webtoon.id);
+      }
+      await pref.setStringList('likedToons', likedToons);
+      setState(() {
+        isLiked = !isLiked;
+      });
+    }
   }
 
   @override
@@ -39,6 +70,14 @@ class _DetailScreenState extends State<DetailScreen> {
         shadowColor: Colors.grey.withOpacity(0.3),
         backgroundColor: Colors.white,
         foregroundColor: Colors.green,
+        actions: [
+          IconButton(
+            onPressed: onHeartTap,
+            icon: Icon(
+              isLiked ? Icons.favorite_outlined : Icons.favorite_outline_outlined,
+            ),
+          )
+        ],
         title: Text(
           widget.webtoon.title,
           style: const TextStyle(fontSize: 24),
@@ -112,10 +151,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
-                      children: [
-                        for (var episode in snapshot.data!)
-                          Episode(episode: episode, webtoonId: widget.webtoon.id)
-                      ],
+                      children: [for (var episode in snapshot.data!) Episode(episode: episode, webtoonId: widget.webtoon.id)],
                     );
                   }
                   return Container();
